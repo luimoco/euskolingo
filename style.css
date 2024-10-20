@@ -106,6 +106,10 @@ p {
 input[type="text"] {
   width: 100%; /* Adjust width as needed */
   margin-bottom: 10px; /* Add spacing between input and button */
+  padding: 10px; /* Add padding to the input */
+  height: 15px; /* Increase the height of the input */
+  border: 1px solid #ccc; /* Add a border to the input */
+  border-radius: 5px; /* Add rounded corners to the input */
 }
 
 .incorrecto {

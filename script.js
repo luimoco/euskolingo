@@ -1,6 +1,12 @@
-// Placeholder for exercise data
+// Ejercicio de tipo escribir
+function generateExerciseEscribir(question) {
+    const questionElement = document.querySelector(".question");
+    questionElement.textContent = question;
+}
 function comprobar() {
-    const respuestaUsuario = document.getElementById("inputRespuestaUsuario").value.toLowerCase();
+    let respuestaUsuario = document.getElementById("inputRespuestaUsuario").value.toLowerCase();
+    // Remove punctuation characters
+    respuestaUsuario = respuestaUsuario.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
 
     if (respuestaUsuario === respuesta) {
         document.querySelector(".feedback").innerHTML = "<p>ZORIONAK! " + pregunta + " " + respuestaUsuario + " da!</p><img src='./ondo.png' width = '64', height = '64' alt='Ondo'>";
@@ -8,7 +14,7 @@ function comprobar() {
         document.querySelector(".feedback").innerHTML = "<p><span class='incorrecto'>" + respuestaUsuario + "</span> ez da " + pregunta + ". " + pregunta + ", <b>" + respuesta + "</b> da.</p><img src='./txarra.png' width = '64', height = '64' alt='Txarra'>";
     }
 }
-// Add event listener for Enter key press
+// Funcionalidad para poder usar enter en los ejercicios de tipo Escritura
 const inputField = document.getElementById("inputRespuestaUsuario");
 if(inputField){
     inputField.addEventListener("keyup", function(event) {
@@ -18,11 +24,12 @@ if(inputField){
     });
 }
 
+/////////////////////////////////////////////////////////////////////////////////
+//Ejercicio de tipo ordenar frase
 function comprobarOrden() {
     const orderedWords = document.querySelectorAll(".ordered-words button");
     const correctOrder = respuesta.split(" ");
     let respuestaUsuario = ""
-
     let isCorrect = true;
     for (let i = 0; i < orderedWords.length; i++) {
         respuestaUsuario += orderedWords[i].textContent + " ";
@@ -31,8 +38,6 @@ function comprobarOrden() {
             break;
         }
     }
-    
-
     if (isCorrect) {
         document.querySelector(".feedback").innerHTML = "<p>ZORIONAK! " + pregunta + ". " + respuestaUsuario + " da!</p><img src='./ondo.png' width = '64', height = '64' alt='Ondo'>";
     } else {
@@ -44,7 +49,7 @@ function comprobarOrden() {
     }
 }
 
-function generateExercise(question, answer) {
+function generateExerciseOrdenar(question, answer) {
     const questionElement = document.querySelector(".question");
     questionElement.textContent = question;
 
@@ -81,8 +86,13 @@ function shuffleArray(array) {
     return array;
 }
 
-// Example usage:
+//////////////////////MAIN//////////////////////////////
 const pregunta = document.getElementById("pregResp").getAttribute("pregunta");
 const respuesta = document.getElementById("pregResp").getAttribute("respuesta");
+const tipo = document.getElementById("pregResp").getAttribute("tipo");
 
-generateExercise(pregunta, respuesta);
+if (tipo == "ordenar") {
+    generateExerciseOrdenar(pregunta, respuesta);
+} else if (tipo == "escribir") {
+    generateExerciseEscribir(pregunta);
+}
