@@ -127,7 +127,7 @@ function checkAndChangeButton() {
         }        
         buttonClicked = true;
         const checkButton = document.getElementById("checkButton");
-        checkButton.textContent = "Urrengo aldera";
+        checkButton.textContent = "Hurrengo galdera";
         checkButton.onclick = loadRandomExercise;
     } else {
         loadRandomExercise();
