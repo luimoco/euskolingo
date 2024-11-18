@@ -111,7 +111,7 @@ if (tipo == "ordenar") {
 
 function loadRandomExercise() {
     const MIN_EXERCISE_NUMBER = 1;
-    const MAX_EXERCISE_NUMBER = 195;
+    const MAX_EXERCISE_NUMBER = 311;
     const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE_NUMBER + 1)) + MIN_EXERCISE_NUMBER;
     window.location.href = `preg${randomNum}.html`;
 }
