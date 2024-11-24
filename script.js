@@ -125,9 +125,9 @@ let buttonClicked = false; // Variable to track if the button has been clicked
 
 function checkAndChangeButton() {
     if (!buttonClicked) {
-        if (tipo == "ordenar") {
+        if (tipo == "O") {
             comprobarOrden();
-        } else if (tipo == "escribir") {
+        } else if (tipo == "E") {
             comprobar();
         }        
         buttonClicked = true;
