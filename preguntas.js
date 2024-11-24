@@ -1,4 +1,4 @@
-[
+export const preguntas = [
 {"id":1,"T":"E","P":"Alumno, alumna","R":"ikasle|ikaslea","C":1},
 {"id":2,"T":"E","P":"Pero","R":"baina","C":1},
 {"id":3,"T":"E","P":"Pescado","R":"arrain|arrraina","C":1},

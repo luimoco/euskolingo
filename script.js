@@ -92,7 +92,7 @@ function shuffleArray(array) {
 
 //////////////////////MAIN//////////////////////////////
 const MIN_EXERCISE_NUMBER = 1;
-const MAX_EXERCISE_NUMBER = 4;
+const MAX_EXERCISE_NUMBER = 311;
 const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE_NUMBER + 1)) + MIN_EXERCISE_NUMBER;
 
 const pregunta = preguntas[randomNum - 1].P;
@@ -100,9 +100,11 @@ let respuesta = preguntas[randomNum - 1].R;
 let tipo = preguntas[randomNum - 1].T;
 
 if (tipo == "O") {
+    document.querySelector(".tipoPregunta").innerHTML = "Erantzun";
     document.querySelector(".preguntaTipo").innerHTML = "<div class='ordered-words'></div><div class='disordered-words'></div>";
     generateExerciseOrdenar(pregunta, respuesta);
 } else if (tipo == "E") {
+    document.querySelector(".tipoPregunta").innerHTML = "Hiztegia";
     document.querySelector(".preguntaTipo").innerHTML = "<input type='text' id='inputRespuestaUsuario' placeholder='...'></input>";
     generateExerciseEscribir(pregunta);
     // Funcionalidad para poder usar enter en los ejercicios de tipo Escritura
