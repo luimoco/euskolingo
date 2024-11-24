@@ -98,7 +98,9 @@ const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE
 const pregunta = preguntas[randomNum - 1].P;
 let respuesta = preguntas[randomNum - 1].R;
 let tipo = preguntas[randomNum - 1].T;
+let clase = preguntas[randomNum - 1].C; // Get the class from the preguntas array
 
+document.querySelector(".class-label").innerHTML = "Klase " + clase;
 if (tipo == "O") {
     document.querySelector(".tipoPregunta").innerHTML = "Erantzun";
     document.querySelector(".preguntaTipo").innerHTML = "<div class='ordered-words'></div><div class='disordered-words'></div>";
@@ -118,11 +120,6 @@ if (tipo == "O") {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const checkButton = document.getElementById("checkButton");
-    checkButton.addEventListener("click", checkAndChangeButton);
-});
-
 let buttonClicked = false; // Variable to track if the button has been clicked
 
 function checkAndChangeButton() {
@@ -135,7 +132,6 @@ function checkAndChangeButton() {
         buttonClicked = true;
         const checkButton = document.getElementById("checkButton");
         checkButton.textContent = "Hurrengo galdera";
-        checkButton.addEventListener("click", checkAndChangeButton); // Use addEventListener
     } else {
         cargaNuevaPregunta();
     }
@@ -143,4 +139,10 @@ function checkAndChangeButton() {
 
 function cargaNuevaPregunta() {
     window.location.href='galderak.html'
+}
+
+// Attach the event listener outside the function
+const checkButton = document.getElementById("checkButton");
+if (checkButton) {
+    checkButton.addEventListener("click", checkAndChangeButton);
 }

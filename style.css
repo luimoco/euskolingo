@@ -38,6 +38,7 @@ p {
     height: 10px;
     background-color: #eee;
     border-radius: 5px;
+    position: relative; /* Add position: relative to the progress bar */
 }
 
 .exercise-container {
@@ -139,4 +140,15 @@ main {
 
 .hidden {
     display: none;
+}
+
+.class-label { /* Add style for the class-label span */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
 }
