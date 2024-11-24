@@ -1,3 +1,6 @@
+//Importar preguntas
+import {preguntas} from "./preguntas.js";
+
 // Ejercicio de tipo escribir
 function generateExerciseEscribir(question) {
     const questionElement = document.querySelector(".question");
@@ -7,7 +10,7 @@ function generateExerciseEscribir(question) {
 function comprobar() {
     let respuestaUsuario = document.getElementById("inputRespuestaUsuario").value.toLowerCase();
     // Remove punctuation characters
-    respuestaUsuario = respuestaUsuario.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+    respuestaUsuario = respuestaUsuario.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()/?]/g,"");
     // Trim leading and trailing spaces
     respuestaUsuario = respuestaUsuario.trim();
     const correctAnswers = respuesta.split("|");
@@ -23,16 +26,6 @@ function comprobar() {
     } else {
         document.querySelector(".feedback").innerHTML = "<p><span class='incorrecto'>" + respuestaUsuario + "</span> ez da " + pregunta + ". " + pregunta + ", <span class='correcto'><b>" + respuesta.replace(/\|/g, "</span></b> edo <b><span class='correcto'>") + "</b></span> da.</p><img src='./txarra.png' width = '64', height = '64' alt='Txarra'>";
     }
-}
-
-// Funcionalidad para poder usar enter en los ejercicios de tipo Escritura
-const inputField = document.getElementById("inputRespuestaUsuario");
-if(inputField){
-    inputField.addEventListener("keyup", function(event) {
-        if (event.key === "Enter") {
-            comprobar();
-        }
-    });
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -98,23 +91,35 @@ function shuffleArray(array) {
 }
 
 //////////////////////MAIN//////////////////////////////
-const pregunta = document.getElementById("pregResp").getAttribute("pregunta");
-const respuesta = document.getElementById("pregResp").getAttribute("respuesta");
-const tipo = document.getElementById("pregResp").getAttribute("tipo");
+const MIN_EXERCISE_NUMBER = 1;
+const MAX_EXERCISE_NUMBER = 4;
+const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE_NUMBER + 1)) + MIN_EXERCISE_NUMBER;
+
+const pregunta = preguntas[randomNum - 1].pregunta;
+let respuesta = preguntas[randomNum - 1].respuesta;
+let tipo = preguntas[randomNum - 1].tipo;
 
 if (tipo == "ordenar") {
+    document.querySelector(".preguntaTipo").innerHTML = "<div class='ordered-words'></div><div class='disordered-words'></div>";
     generateExerciseOrdenar(pregunta, respuesta);
 } else if (tipo == "escribir") {
+    document.querySelector(".preguntaTipo").innerHTML = "<input type='text' id='inputRespuestaUsuario' placeholder='...'></input>";
     generateExerciseEscribir(pregunta);
+    // Funcionalidad para poder usar enter en los ejercicios de tipo Escritura
+    const inputField = document.getElementById("inputRespuestaUsuario");
+    if(inputField){
+        inputField.addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                comprobar();
+            }
+        });
+    }
 }
 
-
-function loadRandomExercise() {
-    const MIN_EXERCISE_NUMBER = 1;
-    const MAX_EXERCISE_NUMBER = 311;
-    const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE_NUMBER + 1)) + MIN_EXERCISE_NUMBER;
-    window.location.href = `preg${randomNum}.html`;
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const checkButton = document.getElementById("checkButton");
+    checkButton.addEventListener("click", checkAndChangeButton);
+});
 
 let buttonClicked = false; // Variable to track if the button has been clicked
 
@@ -128,8 +133,12 @@ function checkAndChangeButton() {
         buttonClicked = true;
         const checkButton = document.getElementById("checkButton");
         checkButton.textContent = "Hurrengo galdera";
-        checkButton.onclick = loadRandomExercise;
+        checkButton.addEventListener("click", checkAndChangeButton); // Use addEventListener
     } else {
-        loadRandomExercise();
+        cargaNuevaPregunta();
     }
+}
+
+function cargaNuevaPregunta() {
+    window.location.href='galderak.html'
 }
