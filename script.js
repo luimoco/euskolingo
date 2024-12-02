@@ -9,11 +9,14 @@ function generateExerciseEscribir(question) {
 
 function comprobar() {
     let respuestaUsuario = document.getElementById("inputRespuestaUsuario").value.toLowerCase();
+    let respuestaFormat = respuesta.toLowerCase()
     // Remove punctuation characters
     respuestaUsuario = respuestaUsuario.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()/?]/g,"");
+    respuestaFormat = respuestaFormat.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()/?]/g,"");
     // Trim leading and trailing spaces
     respuestaUsuario = respuestaUsuario.trim();
-    const correctAnswers = respuesta.split("|");
+    respuestaFormat = respuestaFormat.trim();
+    const correctAnswers = respuestaFormat.split("|");
     let isCorrect = false;
     for (const correctAnswer of correctAnswers) {
         if (respuestaUsuario === correctAnswer.trim()) {
@@ -92,7 +95,7 @@ function shuffleArray(array) {
 
 //////////////////////MAIN//////////////////////////////
 const MIN_EXERCISE_NUMBER = 1;
-const MAX_EXERCISE_NUMBER = 311;
+const MAX_EXERCISE_NUMBER = 410;
 const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE_NUMBER + 1)) + MIN_EXERCISE_NUMBER;
 
 const pregunta = preguntas[randomNum - 1].P;
