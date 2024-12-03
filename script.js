@@ -37,7 +37,7 @@ function comprobarOrden() {
     const orderedWords = document.querySelectorAll(".ordered-words button");
     const correctOrder = respuesta.split(" ");
     let respuestaUsuario = ""
-    let isCorrect = true;
+    let isCorrect = orderedWords.length > 0 ? true : false;
     for (let i = 0; i < orderedWords.length; i++) {
         respuestaUsuario += orderedWords[i].textContent + " ";
         if (orderedWords[i].textContent !== correctOrder[i]) {
@@ -56,11 +56,11 @@ function comprobarOrden() {
     }
 }
 
-function generateExerciseOrdenar(question, answer) {
+function generateExerciseOrdenar(question, answer, tricks) {
     const questionElement = document.querySelector(".question");
     questionElement.textContent = question;
-
-    const answerWords = answer.split(" ");
+    const answerPlusTricks = tricks!==undefined ? answer + " " + tricks : answer;
+    const answerWords = answerPlusTricks.split(" ");
     const disorderedWords = shuffleArray(answerWords);
 
     const orderedWordsDiv = document.querySelector(".ordered-words");
@@ -95,19 +95,22 @@ function shuffleArray(array) {
 
 //////////////////////MAIN//////////////////////////////
 const MIN_EXERCISE_NUMBER = 1;
-const MAX_EXERCISE_NUMBER = 410;
+const MAX_EXERCISE_NUMBER = 475;
 const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE_NUMBER + 1)) + MIN_EXERCISE_NUMBER;
 
+const idPregunta = preguntas[randomNum -1].id;
 const pregunta = preguntas[randomNum - 1].P;
 let respuesta = preguntas[randomNum - 1].R;
 let tipo = preguntas[randomNum - 1].T;
 let clase = preguntas[randomNum - 1].C; // Get the class from the preguntas array
 
+document.querySelector(".IdPregunta").innerHTML = idPregunta;
 document.querySelector(".class-label").innerHTML = "Klase " + clase;
 if (tipo == "O") {
+    const trampas = preguntas[randomNum -1].TR;
     document.querySelector(".tipoPregunta").innerHTML = "Erantzun";
     document.querySelector(".preguntaTipo").innerHTML = "<div class='ordered-words'></div><div class='disordered-words'></div>";
-    generateExerciseOrdenar(pregunta, respuesta);
+    generateExerciseOrdenar(pregunta, respuesta, trampas);
 } else if (tipo == "E") {
     document.querySelector(".tipoPregunta").innerHTML = "Hiztegia";
     document.querySelector(".preguntaTipo").innerHTML = "<input type='text' id='inputRespuestaUsuario' placeholder='...'></input>";
