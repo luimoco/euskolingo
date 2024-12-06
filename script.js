@@ -95,7 +95,7 @@ function shuffleArray(array) {
 
 //////////////////////MAIN//////////////////////////////
 const MIN_EXERCISE_NUMBER = 1;
-const MAX_EXERCISE_NUMBER = 475;
+const MAX_EXERCISE_NUMBER = 521;
 const randomNum = Math.floor(Math.random() * (MAX_EXERCISE_NUMBER - MIN_EXERCISE_NUMBER + 1)) + MIN_EXERCISE_NUMBER;
 
 const idPregunta = preguntas[randomNum -1].id;
